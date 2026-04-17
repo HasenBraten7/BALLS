@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://22le0hwet6th"]
+
+[ext_resource type="Script" uid="uid://b3c1jmjrtlkhj" path="res://TCSN/spawner.gd" id="1_e5uh6"]
+[ext_resource type="PackedScene" uid="uid://ceyrho7fvbquv" path="res://TCSN/AI.tscn" id="2_y0vom"]
+
+[node name="Map" type="Node2D" unique_id=654544600]
+
+[node name="Spawner" type="Node2D" parent="." unique_id=1432215885]
+script = ExtResource("1_e5uh6")
+enemy_scene = ExtResource("2_y0vom")
