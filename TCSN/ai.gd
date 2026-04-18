@@ -7,7 +7,9 @@ func _ready():
 
 func get_nearest_entity() -> CharacterBody2D:
 	var nearest: CharacterBody2D = null
+	var furthest: CharacterBody2D = null
 	var nearest_dist := INF
+	var furthest_dist := INF
 
 	var chars = get_tree().get_nodes_in_group("characters")
 
@@ -19,8 +21,17 @@ func get_nearest_entity() -> CharacterBody2D:
 		if dist < nearest_dist:
 			nearest_dist = dist
 			nearest = c
-
-	return nearest
+		if dist > furthest_dist:
+			furthest_dist = dist
+			furthest = c
+			
+	if bool(randi() % 2):
+		#print("Furthest")
+		#dprint(furthest.global_position)
+		return furthest
+	else:
+		#print("Nearest")
+		return nearest
 
 
 func move_towards_target(target: CharacterBody2D):
