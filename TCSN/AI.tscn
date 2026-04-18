@@ -2,14 +2,19 @@
 
 [ext_resource type="Script" uid="uid://pds7cj0k5tj7" path="res://TCSN/ai.gd" id="1_og0kw"]
 [ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://other/icon.svg" id="1_q2qs2"]
+[ext_resource type="Script" uid="uid://dcw7s5ng0vqlp" path="res://hurtbox.gd" id="3_nd5oo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ivnc3"]
-size = Vector2(38.75, 36.4375)
+size = Vector2(43.375, 42.21875)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nd5oo"]
+size = Vector2(40, 40)
 
 [node name="Ai" type="CharacterBody2D" unique_id=794534406]
 script = ExtResource("1_og0kw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1307917071]
+position = Vector2(-2.3125, -2.890625)
 shape = SubResource("RectangleShape2D_ivnc3")
 
 [node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D" unique_id=719896935]
@@ -17,3 +22,12 @@ physics_interpolation_mode = 2
 position = Vector2(3.8146973e-06, 3.8146973e-06)
 scale = Vector2(0.321289, 0.321289)
 texture = ExtResource("1_q2qs2")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=759861702]
+collision_layer = 0
+script = ExtResource("3_nd5oo")
+metadata/_custom_type_script = "uid://dcw7s5ng0vqlp"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1822320051]
+position = Vector2(-2, -3)
+shape = SubResource("RectangleShape2D_nd5oo")
