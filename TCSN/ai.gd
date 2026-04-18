@@ -1,37 +1,42 @@
 extends CharacterBody2D
 
-@export var speed = 400
+@export var speed := 400
+@export var knockback = 100 #Knockback des gegners
+@export var recoil = 10 #eigener knockback
+
+var current_target: CharacterBody2D = null
 
 func _ready():
-	add_to_group("characters")  # sorgt dafür, dass dieser Node gefunden wird
+	add_to_group("characters")
 
-func get_nearest_entity() -> CharacterBody2D:
-	var nearest: CharacterBody2D = null
-	var furthest: CharacterBody2D = null
-	var nearest_dist := INF
-	var furthest_dist := INF
+	# Timer that picks a new target every few seconds
+	var timer := Timer.new()
+	timer.wait_time = randi_range(0, 3)
+	timer.autostart = true
+	timer.one_shot = false
+	timer.timeout.connect(_on_retarget_timeout)
+	add_child(timer)
 
+	# Pick an initial target
+	_on_retarget_timeout()
+
+
+func _on_retarget_timeout():
+	current_target = get_random_entity()
+
+
+func get_random_entity() -> CharacterBody2D:
 	var chars = get_tree().get_nodes_in_group("characters")
 
-	for c in chars:
-		if c == self:
-			continue
+	if chars.size() <= 1:
+		return null #nur noch eine AI am überleben
 
-		var dist = global_position.distance_to(c.global_position)
-		if dist < nearest_dist:
-			nearest_dist = dist
-			nearest = c
-		if dist > furthest_dist:
-			furthest_dist = dist
-			furthest = c
-			
-	if bool(randi() % 2):
-		#print("Furthest")
-		#dprint(furthest.global_position)
-		return furthest
-	else:
-		#print("Nearest")
-		return nearest
+	# Remove self from the list
+	chars.erase(self)
+
+	# zufalls ziel
+	randomize()
+	return chars[randi() % chars.size()]
 
 
 func move_towards_target(target: CharacterBody2D):
@@ -44,6 +49,5 @@ func move_towards_target(target: CharacterBody2D):
 
 
 func _physics_process(delta):
-	var nearest = get_nearest_entity()
-	move_towards_target(nearest)
+	move_towards_target(current_target)
 	move_and_slide()
