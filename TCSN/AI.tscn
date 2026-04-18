@@ -4,17 +4,16 @@
 [ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://other/icon.svg" id="1_q2qs2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ivnc3"]
-size = Vector2(157.5, 148.875)
+size = Vector2(38.75, 36.4375)
 
 [node name="Ai" type="CharacterBody2D" unique_id=794534406]
 script = ExtResource("1_og0kw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1307917071]
-position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_ivnc3")
 
 [node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D" unique_id=719896935]
 physics_interpolation_mode = 2
-position = Vector2(3, 2)
-scale = Vector2(1.1367186, 1.1367186)
+position = Vector2(3.8146973e-06, 3.8146973e-06)
+scale = Vector2(0.321289, 0.321289)
 texture = ExtResource("1_q2qs2")
