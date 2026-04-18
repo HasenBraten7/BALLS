@@ -10,4 +10,4 @@ func _ready() -> void:
 func _on_area_entered(hitbox: HitBox) -> void:
 	if hitbox != null:
 		reveived_damage.emit(hitbox.get_knockback())
-		get_parent().take_damage(20000, global_position)
+		get_parent().take_damage(2, global_position, hitbox)

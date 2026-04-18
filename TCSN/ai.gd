@@ -1,13 +1,14 @@
 extends CharacterBody2D
 
-@export var speed := 400
+@export var speed := 800
 @export var knockback = 100
 @export var recoil = 10
+@export var knockback_resistance: float = 1
+var knockback_n = Vector2.ZERO
 
 var knockback_velocity: Vector2 = Vector2.ZERO
-var knockback_decay := 800000.0
+var knockback_decay := 80.0
 var is_knocked_back := false
-
 var current_target: CharacterBody2D = null
 
 func _ready():
@@ -52,30 +53,19 @@ func move_towards_target(target: CharacterBody2D):
 
 func _physics_process(delta):
 	if is_knocked_back:
-		# Knockback zuerst
-		knockback_velocity = knockback_velocity.move_toward(knockback_velocity, knockback_decay * delta)
-		velocity = knockback_velocity
-		if knockback_velocity.length() < 10:
-			is_knocked_back = false
-
+		move_and_slide()
+		knockback = knockback.move_toward(Vector2.ZERO, knockback_resistance)
+		velocity += knockback * delta
+		global_position += velocity
 	else:
 		# Normale Bewegung
 		move_towards_target(current_target)
-
 	move_and_slide()
 
 
-#
-#func _on_area_entered(area):
-	#if area.name == "PlayerHitbox":
-		#take_damage(2000, area.global_position)
-
-
-
-func take_damage(knockback_strength: int, from_position: Vector2):
-	var direction = (global_position - from_position).normalized()
-	knockback_velocity = direction * knockback_strength
+func take_damage(knockback_strength: int, from_position: Vector2, hitbox: HitBox):
 	is_knocked_back = true
-	
-
-	#wird aktiviert
+	self.knockback = hitbox.global_position.direction_to(self.global_position)
+	print("hit.glo:", hitbox.global_position)
+	print("self-global:", self.global_position)
+	print("knockback",knockback)
