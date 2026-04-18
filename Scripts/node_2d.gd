@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var attack_range: float = 40.0
 @export var attack_cooldown: float = 0.3
 var can_attack = true
+var is_attacking = false
 
 func get_input():
 	# Spieler dreht sich zur Maus
@@ -24,7 +25,7 @@ func perform_attack():
 	can_attack = false
 
 	var direction = (get_global_mouse_position() - global_position).normalized()
-
+	
 	# Hitbox erzeugen
 	var hitbox := HitBox.new()
 	hitbox.name = "PlayerHitbox"
@@ -43,7 +44,6 @@ func perform_attack():
 
 	# Position der Hitbox vor dem Spieler
 	hitbox.global_position = global_position + direction * attack_range
-
 	# Hitbox in die Szene setzen
 	get_parent().add_child(hitbox)
 

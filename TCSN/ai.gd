@@ -4,6 +4,10 @@ extends CharacterBody2D
 @export var knockback = 100
 @export var recoil = 10
 
+var knockback_velocity: Vector2 = Vector2.ZERO
+var knockback_decay := 800000.0
+var is_knocked_back := false
+
 var current_target: CharacterBody2D = null
 
 func _ready():
@@ -19,7 +23,7 @@ func _ready():
 	_on_retarget_timeout()
 
 	# WICHTIG: Gegner reagiert auf Hitboxen
-	connect("area_entered", Callable(self, "_on_area_entered"))
+	#connect("area_entered", Callable(self, "_on_area_entered"))
 
 
 func _on_retarget_timeout():
@@ -47,16 +51,31 @@ func move_towards_target(target: CharacterBody2D):
 
 
 func _physics_process(delta):
-	move_towards_target(current_target)
+	if is_knocked_back:
+		# Knockback zuerst
+		knockback_velocity = knockback_velocity.move_toward(knockback_velocity, knockback_decay * delta)
+		velocity = knockback_velocity
+		if knockback_velocity.length() < 10:
+			is_knocked_back = false
+
+	else:
+		# Normale Bewegung
+		move_towards_target(current_target)
+
 	move_and_slide()
 
 
-func _on_area_entered(area):
-	# Prüfen ob die Area eine Hitbox ist
-	if area.name == "PlayerHitbox":
-		take_damage(200)
+#
+#func _on_area_entered(area):
+	#if area.name == "PlayerHitbox":
+		#take_damage(2000, area.global_position)
 
 
-func take_damage(knockback_strength: int):
-	knockback = global_position.direction_to(global_position) * -knockback_strength
+
+func take_damage(knockback_strength: int, from_position: Vector2):
+	var direction = (global_position - from_position).normalized()
+	knockback_velocity = direction * knockback_strength
+	is_knocked_back = true
+	
+
 	#wird aktiviert
