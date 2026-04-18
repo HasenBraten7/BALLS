@@ -5,7 +5,6 @@ extends CharacterBody2D
 @export var recoil = 10
 @export var knockback_resistance: float = 1
 var knockback_n = Vector2.ZERO
-
 var knockback_velocity: Vector2 = Vector2.ZERO
 var knockback_decay := 80.0
 var is_knocked_back := false
