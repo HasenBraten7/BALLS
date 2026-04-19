@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://cfadmj0vfi3on"]
 
 [ext_resource type="PackedScene" uid="uid://6mo5s0d5jkoy" path="res://character_body_2d_Andi.tscn" id="1_6xxdu"]
-[ext_resource type="Texture2D" uid="uid://c6tty30o4eyed" path="res://assets/Simon/Simon.png" id="2_hiif1"]
-[ext_resource type="Texture2D" uid="uid://bf5huhfnibchr" path="res://assets/Simon/Simon_Halbschlag.png" id="3_mryqs"]
-[ext_resource type="Texture2D" uid="uid://bsiaxkh68dpwa" path="res://assets/Simon/Simon_Schlag.png" id="4_hnyop"]
+[ext_resource type="Texture2D" uid="uid://c6tty30o4eyed" path="res://Assets/Simon/Simon.png" id="2_hiif1"]
+[ext_resource type="Texture2D" uid="uid://bf5huhfnibchr" path="res://Assets/Simon/Simon_Halbschlag.png" id="3_mryqs"]
+[ext_resource type="Texture2D" uid="uid://bsiaxkh68dpwa" path="res://Assets/Simon/Simon_Schlag.png" id="4_hnyop"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ce32c"]
 animations = [{
