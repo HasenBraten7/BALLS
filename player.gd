@@ -33,7 +33,7 @@ func _process(delta: float) -> void:
 		var direction = (area - global_position) * 5
 		AI.apply_knockback(direction, 25)
 		var s = get_tree().get_nodes_in_group("player")
-		s[0].apply_knockback(-1 * direction, 25)
+		s[0].apply_knockback(-1 * direction, 5)
 		print("Global_Pos:",global_position )
 		print("area:", $hitarea/hitbox.global_position )
 		print("direction:", direction)

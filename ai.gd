@@ -5,12 +5,12 @@ const SPEED = 700.0
 var knocked = false
 var AI: Node2D = null
 var d_name = "Ai"
-var states = ["IDLE", "HUNT_PLAYER", "HUNT_AI"]
+var states = ["IDLE", "HUNT_AI", "HUNT_PLAYER"]
 var state = "IDLE"
 var direction: Vector2
 var strength: int = 2
-var can_attack = false
-var cooldown = 1.0
+var can_attack = true
+var cooldown = 0.5
 
 func _ready():
 	add_to_group("AI")
@@ -61,9 +61,10 @@ func _knocked_end():
 
 func _on_hitarea_body_entered(body: Node2D) -> void:
 	if can_attack:
-		if(body.d_name == 'Ai' or body.d_name == "Player"):
+		if(body.d_name == "Ai" or body.d_name == "Player"):
 			AI = body
 		if (AI != null):
+			print("HIT!")
 			can_attack = false
 			var area = $hitarea.global_position
 			var direction = (area - global_position)  * 5
@@ -84,6 +85,7 @@ func _on_hitarea_body_exited(body: Node2D) -> void:
 	AI = null
 
 func choose_state():
+	randomize()
 	var timer := Timer.new()
 	timer.wait_time = (randi() % 4 ) +1
 	timer.autostart = false
@@ -91,7 +93,10 @@ func choose_state():
 	timer.timeout.connect(choose_state)
 	add_child(timer)
 	timer.start()
-	state = states[randi() % 3]
+	if randi() % 50 < 10:
+		state = "HUNT_PLAYER"
+	else:
+		state = states[randi() % 2]
 
 func get_closest_AI() -> Vector2:
 	var actors = get_tree().get_nodes_in_group("AI")
