@@ -40,8 +40,9 @@ func _process(delta: float) -> void:
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if(body.d_name == 'Ai'):
-		AI = body
+	if(body.name != "TileMapLayer"):
+		if(body.d_name == 'Ai'):
+			AI = body
 
 
 func _on_hitarea_body_exited(body: Node2D) -> void:

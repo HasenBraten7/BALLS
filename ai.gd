@@ -60,23 +60,25 @@ func _knocked_end():
 
 
 func _on_hitarea_body_entered(body: Node2D) -> void:
-	if can_attack:
-		if(body.d_name == "Ai" or body.d_name == "Player"):
-			AI = body
-		if (AI != null):
-			print("HIT!")
-			can_attack = false
-			var area = $hitarea.global_position
-			var direction = (area - global_position)  * 5
-			var timer := Timer.new()
-			timer.wait_time = cooldown
-			timer.autostart = false
-			timer.one_shot = true
-			timer.timeout.connect(set_can_attack)
-			add_child(timer)
-			timer.start()
-			AI.apply_knockback(direction, 25)
-			self.apply_knockback(-1 * direction, 5)
+	if(body.name != "TileMapLayer"):
+		if can_attack:
+			print("Body:", body.name)
+			if(body.d_name == "Ai" or body.d_name == "Player"):
+				AI = body
+			if (AI != null):
+				print("HIT!")
+				can_attack = false
+				var area = $hitarea.global_position
+				var direction = (area - global_position)  * 5
+				var timer := Timer.new()
+				timer.wait_time = cooldown
+				timer.autostart = false
+				timer.one_shot = true
+				timer.timeout.connect(set_can_attack)
+				add_child(timer)
+				timer.start()
+				AI.apply_knockback(direction, 25)
+				self.apply_knockback(-1 * direction, 5)
 
 func set_can_attack():
 	can_attack = true
