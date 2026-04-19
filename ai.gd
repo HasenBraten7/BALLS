@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-const SPEED = 700.0
+const SPEED = 500.0
 var knocked = false
 var AI: Node2D = null
 var d_name = "Ai"
@@ -10,7 +10,7 @@ var state = "IDLE"
 var direction: Vector2
 var strength: int = 2
 var can_attack = true
-var cooldown = 0.5
+var cooldown = 0.2
 
 func _ready():
 	add_to_group("AI")
@@ -95,7 +95,7 @@ func choose_state():
 	timer.timeout.connect(choose_state)
 	add_child(timer)
 	timer.start()
-	if randi() % 50 < 10:
+	if randi() % 50 < 25:
 		state = "HUNT_PLAYER"
 	else:
 		state = states[randi() % 2]
@@ -115,7 +115,7 @@ func get_closest_AI() -> Vector2:
 			closest = actor
 	if closest == null:
 		states[2] ="HUNT_PLAYER"
-		return Vector2(100,100)
+		return global_position
 	else:
 		return (closest.global_position * 1)
 		
