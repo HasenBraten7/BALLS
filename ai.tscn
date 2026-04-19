@@ -7,26 +7,25 @@
 size = Vector2(24, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3i38e"]
-size = Vector2(40, 40)
+size = Vector2(24, 24)
 
 [node name="Ai" type="CharacterBody2D" unique_id=750768365]
 script = ExtResource("1_3i38e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1463406989]
-visible = false
-position = Vector2(20, 20)
+position = Vector2(12, 12)
 shape = SubResource("RectangleShape2D_e1uuf")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=782681974]
-position = Vector2(20, 20)
-scale = Vector2(0.3125, 0.3125)
+position = Vector2(12, 12)
+scale = Vector2(0.1875, 0.1875)
 texture = ExtResource("1_c35dq")
 
 [node name="hitarea" type="Area2D" parent="." unique_id=546882087]
-position = Vector2(20, 20)
+position = Vector2(12, 12)
 
 [node name="hitbox" type="CollisionShape2D" parent="hitarea" unique_id=1985346245]
-position = Vector2(40, 0)
+position = Vector2(24, 0)
 shape = SubResource("RectangleShape2D_3i38e")
 
 [connection signal="body_entered" from="hitarea" to="." method="_on_hitarea_body_entered"]

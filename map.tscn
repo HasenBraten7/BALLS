@@ -7,16 +7,16 @@
 [ext_resource type="Script" uid="uid://cbkias8sb8r87" path="res://border.gd" id="4_p5pve"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e0an3"]
-size = Vector2(1080, 20)
+size = Vector2(3736, 790)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p5pve"]
-size = Vector2(1088, 18)
+size = Vector2(3776, 986)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_urblq"]
-size = Vector2(14, 776)
+size = Vector2(1080, 776)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iw27f"]
-size = Vector2(40, 784)
+size = Vector2(1616, 784)
 
 [node name="Map" type="Node2D" unique_id=2108066913]
 script = ExtResource("1_urblq")
@@ -32,28 +32,28 @@ ai_scene = ExtResource("1_wijl4")
 script = ExtResource("4_p5pve")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Border_top" unique_id=221676179]
-position = Vector2(536, -24)
+position = Vector2(788, -429)
 shape = SubResource("RectangleShape2D_e0an3")
 
 [node name="Border_Bottom" type="Area2D" parent="." unique_id=977910507]
 script = ExtResource("4_p5pve")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Border_Bottom" unique_id=365914569]
-position = Vector2(544, 743)
+position = Vector2(800, 1227)
 shape = SubResource("RectangleShape2D_p5pve")
 
 [node name="Border_Left" type="Area2D" parent="." unique_id=1370101637]
 script = ExtResource("4_p5pve")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Border_Left" unique_id=1607208129]
-position = Vector2(-7, 356)
+position = Vector2(-540, 356)
 shape = SubResource("RectangleShape2D_urblq")
 
 [node name="Border_Right" type="Area2D" parent="." unique_id=1749743569]
 script = ExtResource("4_p5pve")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Border_Right" unique_id=1677079532]
-position = Vector2(1092, 360)
+position = Vector2(1880, 360)
 shape = SubResource("RectangleShape2D_iw27f")
 
 [connection signal="body_entered" from="Border_top" to="Border_top" method="_on_body_entered"]

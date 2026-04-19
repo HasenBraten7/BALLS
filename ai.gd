@@ -9,7 +9,7 @@ var states = ["IDLE", "HUNT_PLAYER", "HUNT_AI"]
 var state = "IDLE"
 var direction: Vector2
 var strength: int = 2
-var can_attack = true
+var can_attack = false
 var cooldown = 1.0
 
 func _ready():
@@ -19,16 +19,22 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	
 	if knocked:
-		
 		move_and_slide()
+		print("Test Knock")
 	else:
 		if(state == "IDLE"):
 			idle()
 		elif state == "HUNT_PLAYER":
 			direction = (get_Player_pos() - global_position)
+			var dist = global_position.distance_to(get_Player_pos())
+			if dist <= 20:
+				idle()
 			$hitarea.look_at(get_Player_pos())
 		elif state == "HUNT_AI":
 			direction = (get_closest_AI() - global_position)
+			var dist = global_position.distance_to(get_closest_AI())
+			if dist <= 20:
+				idle()
 			$hitarea.look_at(get_closest_AI())
 		velocity = direction.normalized() * SPEED
 		move_and_slide()
@@ -36,6 +42,7 @@ func _physics_process(delta: float) -> void:
 
 func apply_knockback(direction: Vector2, strength: int):
 	strength = strength
+	print("Knocked")
 	knocked = true
 	velocity = direction * strength
 	var timer := Timer.new()
@@ -45,6 +52,7 @@ func apply_knockback(direction: Vector2, strength: int):
 	timer.timeout.connect(_knocked_end)
 	add_child(timer)
 	timer.start()
+	print(strength)
 
 func _knocked_end():
 	knocked = false
@@ -58,7 +66,7 @@ func _on_hitarea_body_entered(body: Node2D) -> void:
 		if (AI != null):
 			can_attack = false
 			var area = $hitarea.global_position
-			var direction = (area - global_position)  * strength
+			var direction = (area - global_position)  * 5
 			var timer := Timer.new()
 			timer.wait_time = cooldown
 			timer.autostart = false
