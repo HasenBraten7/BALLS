@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://o1wokvja84yp"]
+
+[ext_resource type="Script" uid="uid://g6ydtpkjtegq" path="res://ai.gd" id="1_3i38e"]
+[ext_resource type="Texture2D" uid="uid://2r6pmwyihcls" path="res://icon.svg" id="1_c35dq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e1uuf"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3i38e"]
+size = Vector2(66, 64)
+
+[node name="Ai" type="CharacterBody2D" unique_id=750768365]
+script = ExtResource("1_3i38e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1463406989]
+position = Vector2(32, 32)
+shape = SubResource("RectangleShape2D_e1uuf")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=782681974]
+position = Vector2(32, 32)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_c35dq")
+
+[node name="hitarea" type="Area2D" parent="." unique_id=546882087]
+position = Vector2(96, 32)
+
+[node name="hitbox" type="CollisionShape2D" parent="hitarea" unique_id=1985346245]
+shape = SubResource("RectangleShape2D_3i38e")
+
+[connection signal="body_entered" from="hitarea" to="." method="_on_hitarea_body_entered"]
+[connection signal="body_exited" from="hitarea" to="." method="_on_hitarea_body_exited"]

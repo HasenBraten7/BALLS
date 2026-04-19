@@ -8,7 +8,7 @@ var strength = 20
 
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
-	$Area2D.look_at(get_global_mouse_position())
+	$hitarea.look_at(get_global_mouse_position())
 	velocity = input_direction * speed
 
 func _physics_process(delta):
@@ -24,7 +24,7 @@ func _physics_process(delta):
 func _process(delta: float) -> void:
 	if (AI != null and Input.is_action_just_pressed("click")):
 		print("Test")
-		var area = $Area2D.global_position
+		var area = $hitarea.global_position
 		var direction = (area - global_position)
 		AI.apply_knockback(direction)
 
@@ -33,6 +33,10 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	print("Test2")
 	if(body.name == 'Ai'):
 		AI = body
+
+
+func _on_hitarea_body_exited(body: Node2D) -> void:
+	AI = null
 
 
 #getting knocked back
@@ -53,7 +57,3 @@ func _knocked_end():
 	print("End")
 	knocked = false
 	velocity = Vector2.ZERO
-
-
-func _on_area_2d_body_exited(body: Node2D) -> void:
-	AI = null
