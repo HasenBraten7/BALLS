@@ -14,20 +14,20 @@ func get_input():
 	velocity = input_direction * speed
 
 func _physics_process(delta):
-	get_input()
-	move_and_slide()
+	
 	if knocked:
 		#print()
 		move_and_slide()
 	else:
-		#searching einfügen
+		get_input()
 		move_and_slide()
 
 func _process(delta: float) -> void:
 	if (AI != null and Input.is_action_just_pressed("click")):
 		var area = $hitarea.global_position
 		var direction = (area - global_position) * strength
-		AI.apply_knockback(direction)
+		AI.apply_knockback(direction, 5)
+		self.apply_knockback(-1 * direction, 1)
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
@@ -42,7 +42,8 @@ func _on_hitarea_body_exited(body: Node2D) -> void:
 
 #getting knocked back
 
-func apply_knockback(direction: Vector2):
+func apply_knockback(direction: Vector2, strength: int):
+	strength = strength
 	knocked = true
 	velocity = direction * strength
 	var timer := Timer.new()

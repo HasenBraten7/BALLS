@@ -3,13 +3,12 @@ extends CharacterBody2D
 
 const SPEED = 300.0
 var knocked = false
-var strength = 5
 var AI: Node2D = null
 var d_name = "Ai"
 const states = ["IDLE", "HUNT_PLAYER", "HUNT_AI"]
 var state = "IDLE"
 var direction: Vector2
-
+var strength: int = 2
 
 func _ready():
 	add_to_group("AI")
@@ -24,8 +23,10 @@ func _physics_process(delta: float) -> void:
 		if(state == "IDLE"):
 			idle()
 		elif state == "HUNT_PLAYER":
-			direction = (get_Player_pos() - global_position)
-			$hitarea.look_at(get_Player_pos())
+			direction = (get_closest_AI() - global_position)
+			$hitarea.look_at(get_closest_AI())
+			#direction = (get_Player_pos() - global_position)
+			#$hitarea.look_at(get_Player_pos())
 		elif state == "HUNT_AI":
 			direction = (get_closest_AI() - global_position)
 			$hitarea.look_at(get_closest_AI())
@@ -33,7 +34,8 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 	
 
-func apply_knockback(direction: Vector2):
+func apply_knockback(direction: Vector2, strength: int):
+	strength = strength
 	knocked = true
 	velocity = direction * strength
 	var timer := Timer.new()
@@ -55,7 +57,8 @@ func _on_hitarea_body_entered(body: Node2D) -> void:
 	if (AI != null):
 		var area = $hitarea.global_position
 		var direction = (area - global_position)  * strength
-		AI.apply_knockback(direction)
+		AI.apply_knockback(direction, 5)
+		self.apply_knockback(-1 * direction, 2)
 
 
 func _on_hitarea_body_exited(body: Node2D) -> void:
