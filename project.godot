@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="BALLS2"
-run/main_scene="uid://bbq1anmbc6gby"
+run/main_scene="uid://dxq8ty811rb8d"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 

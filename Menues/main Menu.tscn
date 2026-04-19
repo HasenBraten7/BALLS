@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://dxq8ty811rb8d"]
+
+[ext_resource type="Script" uid="uid://74f0egh6urwx" path="res://Menues/main_menu.gd" id="1_nup17"]
+
+[node name="MainMenu" type="Node2D" unique_id=1003593039]
+script = ExtResource("1_nup17")
+
+[node name="Button Manager" type="Control" parent="." unique_id=1338349223]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="Start" type="Button" parent="Button Manager" unique_id=1633438347]
+layout_mode = 0
+offset_left = 344.0
+offset_top = 152.0
+offset_right = 768.0
+offset_bottom = 248.0
+
+[node name="Label" type="Label" parent="Button Manager/Start" unique_id=305950377]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 48
+text = "Start"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Quit" type="Button" parent="Button Manager" unique_id=527332084]
+layout_mode = 0
+offset_left = 392.0
+offset_top = 296.0
+offset_right = 712.0
+offset_bottom = 384.0
+
+[node name="Label" type="Label" parent="Button Manager/Quit" unique_id=113966381]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 48
+text = "Quit"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[connection signal="pressed" from="Button Manager/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Button Manager/Quit" to="." method="_on_quit_pressed"]
