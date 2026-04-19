@@ -1,14 +1,16 @@
 extends CharacterBody2D
 
 
-const SPEED = 300.0
+const SPEED = 700.0
 var knocked = false
 var AI: Node2D = null
 var d_name = "Ai"
-const states = ["IDLE", "HUNT_PLAYER", "HUNT_AI"]
+var states = ["IDLE", "HUNT_PLAYER", "HUNT_AI"]
 var state = "IDLE"
 var direction: Vector2
 var strength: int = 2
+var can_attack = true
+var cooldown = 1.0
 
 func _ready():
 	add_to_group("AI")
@@ -17,16 +19,14 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	
 	if knocked:
-		#print()
+		
 		move_and_slide()
 	else:
 		if(state == "IDLE"):
 			idle()
 		elif state == "HUNT_PLAYER":
-			direction = (get_closest_AI() - global_position)
-			$hitarea.look_at(get_closest_AI())
-			#direction = (get_Player_pos() - global_position)
-			#$hitarea.look_at(get_Player_pos())
+			direction = (get_Player_pos() - global_position)
+			$hitarea.look_at(get_Player_pos())
 		elif state == "HUNT_AI":
 			direction = (get_closest_AI() - global_position)
 			$hitarea.look_at(get_closest_AI())
@@ -52,21 +52,32 @@ func _knocked_end():
 
 
 func _on_hitarea_body_entered(body: Node2D) -> void:
-	if(body.d_name == 'Ai' or body.d_name == "Player"):
-		AI = body
-	if (AI != null):
-		var area = $hitarea.global_position
-		var direction = (area - global_position)  * strength
-		AI.apply_knockback(direction, 5)
-		self.apply_knockback(-1 * direction, 2)
+	if can_attack:
+		if(body.d_name == 'Ai' or body.d_name == "Player"):
+			AI = body
+		if (AI != null):
+			can_attack = false
+			var area = $hitarea.global_position
+			var direction = (area - global_position)  * strength
+			var timer := Timer.new()
+			timer.wait_time = cooldown
+			timer.autostart = false
+			timer.one_shot = true
+			timer.timeout.connect(set_can_attack)
+			add_child(timer)
+			timer.start()
+			AI.apply_knockback(direction, 25)
+			self.apply_knockback(-1 * direction, 5)
 
+func set_can_attack():
+	can_attack = true
 
 func _on_hitarea_body_exited(body: Node2D) -> void:
 	AI = null
 
 func choose_state():
 	var timer := Timer.new()
-	timer.wait_time = (randi() % 3 ) +1
+	timer.wait_time = (randi() % 4 ) +1
 	timer.autostart = false
 	timer.one_shot = true
 	timer.timeout.connect(choose_state)
@@ -87,13 +98,16 @@ func get_closest_AI() -> Vector2:
 		if dist < closest_dist:
 			closest_dist = dist
 			closest = actor
-
-	return closest.global_position
-	
+	if closest == null:
+		states[2] ="HUNT_PLAYER"
+		return Vector2(100,100)
+	else:
+		return (closest.global_position * 1)
+		
 func get_Player_pos() -> Vector2:
 	var actor = get_tree().get_nodes_in_group("player")
 	var pos = actor[0].global_position
-	return pos
+	return (pos * 1.0)
 
 func idle():
 	velocity = Vector2.ZERO

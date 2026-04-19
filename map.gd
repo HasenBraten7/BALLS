@@ -8,11 +8,6 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
-
-
-func _on_start_pressed() -> void:
-	get_tree().change_scene_to_file("res://map.tscn")
-
-func _on_quit_pressed() -> void:
-	get_tree().quit()
+	var AI = get_tree().get_nodes_in_group("AI")
+	if AI.size() == 0 or AI == null:
+		get_tree().change_scene_to_file("res://Menues/end screen.tscn")

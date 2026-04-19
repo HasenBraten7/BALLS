@@ -4,28 +4,29 @@
 [ext_resource type="Texture2D" uid="uid://2r6pmwyihcls" path="res://icon.svg" id="1_c35dq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e1uuf"]
-size = Vector2(52, 52)
+size = Vector2(24, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3i38e"]
-size = Vector2(51.25, 52)
+size = Vector2(40, 40)
 
 [node name="Ai" type="CharacterBody2D" unique_id=750768365]
 script = ExtResource("1_3i38e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1463406989]
-position = Vector2(26, 26)
+visible = false
+position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_e1uuf")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=782681974]
-position = Vector2(26, 26)
-scale = Vector2(0.40625, 0.40625)
+position = Vector2(20, 20)
+scale = Vector2(0.3125, 0.3125)
 texture = ExtResource("1_c35dq")
 
 [node name="hitarea" type="Area2D" parent="." unique_id=546882087]
 position = Vector2(20, 20)
 
 [node name="hitbox" type="CollisionShape2D" parent="hitarea" unique_id=1985346245]
-position = Vector2(58.375, 6)
+position = Vector2(40, 0)
 shape = SubResource("RectangleShape2D_3i38e")
 
 [connection signal="body_entered" from="hitarea" to="." method="_on_hitarea_body_entered"]

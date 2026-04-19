@@ -1,3 +1,71 @@
 [gd_scene format=3 uid="uid://dag1s7ra8qr05"]
 
+[ext_resource type="Script" uid="uid://74f0egh6urwx" path="res://Menues/main_menu.gd" id="1_djiyv"]
+
 [node name="GameOver" type="Node2D" unique_id=90657208]
+script = ExtResource("1_djiyv")
+
+[node name="Button Manager" type="Control" parent="." unique_id=1739010764]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="Start" type="Button" parent="Button Manager" unique_id=2118501707]
+layout_mode = 0
+offset_left = 344.0
+offset_top = 152.0
+offset_right = 768.0
+offset_bottom = 248.0
+
+[node name="Label" type="Label" parent="Button Manager/Start" unique_id=60313088]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 48
+text = "Restart"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Quit" type="Button" parent="Button Manager" unique_id=2120499283]
+layout_mode = 0
+offset_left = 392.0
+offset_top = 296.0
+offset_right = 712.0
+offset_bottom = 384.0
+
+[node name="Label" type="Label" parent="Button Manager/Quit" unique_id=891334389]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 48
+text = "Quit"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Label" type="Label" parent="Button Manager" unique_id=1662282467]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_right = 8.0
+offset_bottom = -496.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 48
+text = "You Lost the fight"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[connection signal="pressed" from="Button Manager/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Button Manager/Quit" to="." method="_on_quit_pressed"]
