@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://dx42qn48hgt1y" path="res://map.gd" id="1_urblq"]
 [ext_resource type="PackedScene" uid="uid://b2xovfajgewgb" path="res://ai.tscn" id="1_wijl4"]
 [ext_resource type="PackedScene" uid="uid://bf3mckdjy06r6" path="res://player.tscn" id="2_e0an3"]
-[ext_resource type="Script" uid="uid://h7fd5ovqw8ud" path="res://spawner.gd" id="3_e0an3"]
 [ext_resource type="Script" uid="uid://8sr4wfp451j1" path="res://1776602745263.gd" id="3_sb2pt"]
 [ext_resource type="Script" uid="uid://cbkias8sb8r87" path="res://border.gd" id="4_p5pve"]
 [ext_resource type="Texture2D" uid="uid://duoa8775s2yke" path="res://tex/1776602745263.png" id="6_iw27f"]
@@ -12,6 +11,9 @@
 [ext_resource type="Texture2D" uid="uid://2bk2brldo2bl" path="res://tex/1776603059149.png" id="7_gqbix"]
 [ext_resource type="Texture2D" uid="uid://dnvxsck6rkjh1" path="res://tex/1776603059153.png" id="8_oysan"]
 [ext_resource type="Texture2D" uid="uid://hxfvkdyrxlpx" path="res://tex/1776603059159.png" id="9_sb2pt"]
+[ext_resource type="PackedScene" uid="uid://cx4gtb17jap5t" path="res://ai_b.tscn" id="13_6qsgm"]
+[ext_resource type="PackedScene" uid="uid://6sx7l3cei772" path="res://ai_ll.tscn" id="13_ooc2g"]
+[ext_resource type="PackedScene" uid="uid://t7ta308onyqg" path="res://ai_l.tscn" id="14_ooc2g"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gqbix"]
 texture = ExtResource("7_gqbix")
@@ -290,10 +292,6 @@ script = ExtResource("6_oysan")
 [node name="Player" parent="." unique_id=1247733239 instance=ExtResource("2_e0an3")]
 position = Vector2(499, 259)
 
-[node name="spawner" type="Node2D" parent="." unique_id=1690899129]
-script = ExtResource("3_e0an3")
-ai_scene = ExtResource("1_wijl4")
-
 [node name="Border_top" type="Area2D" parent="." unique_id=374296839]
 script = ExtResource("4_p5pve")
 
@@ -321,6 +319,18 @@ script = ExtResource("4_p5pve")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Border_Right" unique_id=1677079532]
 position = Vector2(1896, 360)
 shape = SubResource("RectangleShape2D_iw27f")
+
+[node name="Ai" parent="." unique_id=750768365 instance=ExtResource("1_wijl4")]
+position = Vector2(251, 288)
+
+[node name="Ai2" parent="." unique_id=1175768205 instance=ExtResource("13_6qsgm")]
+position = Vector2(311, 178)
+
+[node name="Ai3" parent="." unique_id=1296252100 instance=ExtResource("13_ooc2g")]
+position = Vector2(681, 411)
+
+[node name="Ai4" parent="." unique_id=46388054 instance=ExtResource("14_ooc2g")]
+position = Vector2(664, 172)
 
 [connection signal="body_entered" from="Border_top" to="Border_top" method="_on_body_entered"]
 [connection signal="body_entered" from="Border_Bottom" to="Border_top" method="_on_border_bottom_body_entered"]

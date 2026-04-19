@@ -10,7 +10,7 @@ func _ready():
 
 func get_input():
 	look_at(get_global_mouse_position())
-	$Sprite2D.global_rotation = 0.0
+	$AnimatedSprite2D2.global_rotation = 0.0
 	velocity = transform.x * Input.get_axis("down", "up") * speed
 	#var input_direction = Input.get_vector("left", "right", "up", "down")
 	$hitarea.look_at(get_global_mouse_position())

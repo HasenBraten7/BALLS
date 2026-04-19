@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://6sx7l3cei772"]
+
+[ext_resource type="PackedScene" uid="uid://b2xovfajgewgb" path="res://ai.tscn" id="1_364fq"]
+[ext_resource type="Texture2D" uid="uid://cyb1frtjyjqi0" path="res://Assets/Lennard/Lennard.png" id="2_rvstl"]
+[ext_resource type="Texture2D" uid="uid://bm0j6woioh3d1" path="res://Assets/Lennard/Lennard_Halbschlag.png" id="3_4bp3o"]
+[ext_resource type="Texture2D" uid="uid://cb3t0cee7mvhy" path="res://Assets/Lennard/Lennard_Schlag.png" id="4_maodk"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h853y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_rvstl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_4bp3o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_maodk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Ai" unique_id=750768365 instance=ExtResource("1_364fq")]
+
+[node name="AnimatedSprite2D" parent="." index="2" unique_id=1962141234]
+sprite_frames = SubResource("SpriteFrames_h853y")
+frame_progress = 0.36474437

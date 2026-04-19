@@ -1,32 +1,94 @@
 [gd_scene format=3 uid="uid://b2xovfajgewgb"]
 
 [ext_resource type="Script" uid="uid://g6ydtpkjtegq" path="res://ai.gd" id="1_3i38e"]
-[ext_resource type="Texture2D" uid="uid://2r6pmwyihcls" path="res://icon.svg" id="1_c35dq"]
+[ext_resource type="Texture2D" uid="uid://ce3yxaast44v" path="res://Assets/Andi/Andi.png" id="3_c4c0y"]
+[ext_resource type="Texture2D" uid="uid://dvrergpb16xkd" path="res://Assets/Andi/Andi_Halbschlag.png" id="4_0e438"]
+[ext_resource type="Texture2D" uid="uid://dah3px4rloiv3" path="res://Assets/Andi/Andi_Schlag.png" id="5_w7t4q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e1uuf"]
-size = Vector2(24, 24)
+size = Vector2(56, 96)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3i38e"]
-size = Vector2(24, 24)
+size = Vector2(86, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kb3ju"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_c4c0y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_0e438")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_w7t4q")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_dcl4r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.08726646]
+}
+
+[sub_resource type="Animation" id="Animation_v6nlr"]
+resource_name = "wackeln"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.03, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.08726646, -0.08726646, 0.08726646]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a5s6k"]
+_data = {
+&"RESET": SubResource("Animation_dcl4r"),
+&"wackeln": SubResource("Animation_v6nlr")
+}
 
 [node name="Ai" type="CharacterBody2D" unique_id=750768365]
 script = ExtResource("1_3i38e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1463406989]
-position = Vector2(12, 12)
+position = Vector2(28, 48)
 shape = SubResource("RectangleShape2D_e1uuf")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=782681974]
-position = Vector2(12, 12)
-scale = Vector2(0.1875, 0.1875)
-texture = ExtResource("1_c35dq")
-
 [node name="hitarea" type="Area2D" parent="." unique_id=546882087]
-position = Vector2(12, 12)
+position = Vector2(28, 48)
 
 [node name="hitbox" type="CollisionShape2D" parent="hitarea" unique_id=1985346245]
-position = Vector2(24, 0)
+position = Vector2(73, 0)
 shape = SubResource("RectangleShape2D_3i38e")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1962141234]
+position = Vector2(24.555164, 47.39647)
+rotation = 0.08726646
+scale = Vector2(3.0242133, 3.0242133)
+sprite_frames = SubResource("SpriteFrames_kb3ju")
+offset = Vector2(8.51, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=60236122]
+libraries/ = SubResource("AnimationLibrary_a5s6k")
 
 [connection signal="body_entered" from="hitarea" to="." method="_on_hitarea_body_entered"]
 [connection signal="body_exited" from="hitarea" to="." method="_on_hitarea_body_exited"]

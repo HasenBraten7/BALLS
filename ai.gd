@@ -11,13 +11,16 @@ var direction: Vector2
 var strength: int = 2
 var can_attack = true
 var cooldown = 0.2
+@export var animation_sprite: AnimatedSprite2D
+@export var anim: AnimationPlayer
 
 func _ready():
 	add_to_group("AI")
 	choose_state()
 	
 func _physics_process(delta: float) -> void:
-	
+	$AnimationPlayer.play("wackeln")
+	$AnimatedSprite2D.play("default")
 	if knocked:
 		move_and_slide()
 		print("Test Knock")
@@ -77,7 +80,7 @@ func _on_hitarea_body_entered(body: Node2D) -> void:
 				timer.timeout.connect(set_can_attack)
 				add_child(timer)
 				timer.start()
-				AI.apply_knockback(direction, 25)
+				AI.apply_knockback(direction, 5)
 				self.apply_knockback(-1 * direction, 5)
 
 func set_can_attack():

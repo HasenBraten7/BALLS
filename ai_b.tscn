@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://cx4gtb17jap5t"]
+
+[ext_resource type="PackedScene" uid="uid://b2xovfajgewgb" path="res://ai.tscn" id="1_tcrab"]
+[ext_resource type="Texture2D" uid="uid://cm5w14cp0qted" path="res://Assets/Benni/Benni.png" id="2_mr35d"]
+[ext_resource type="Texture2D" uid="uid://b735mbfo1w3r6" path="res://Assets/Benni/Benni_Halbschlag.png" id="3_8dhrb"]
+[ext_resource type="Texture2D" uid="uid://cmd802qs72o1g" path="res://Assets/Benni/Benni_Schlag.png" id="4_wfgyf"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s3yqc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_mr35d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_8dhrb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_wfgyf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Ai" unique_id=750768365 instance=ExtResource("1_tcrab")]
+
+[node name="AnimatedSprite2D" parent="." index="2" unique_id=1962141234]
+position = Vector2(23.999996, 48)
+sprite_frames = SubResource("SpriteFrames_s3yqc")
