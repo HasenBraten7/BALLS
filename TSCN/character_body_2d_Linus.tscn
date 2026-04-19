@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://r4hlaj0ynqie"]
+
+[ext_resource type="PackedScene" uid="uid://6mo5s0d5jkoy" path="res://character_body_2d_Andi.tscn" id="1_3f1il"]
+[ext_resource type="Texture2D" uid="uid://cjtkxtybdxjb1" path="res://assets/Linus/Linus.png" id="2_76hc5"]
+[ext_resource type="Texture2D" uid="uid://dnwd0m3hwi386" path="res://assets/Linus/Linus_Halbschlag.png" id="3_6yx68"]
+[ext_resource type="Texture2D" uid="uid://buwaucl3qve12" path="res://assets/Linus/Linus_Schlag.png" id="4_7bjqv"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bg5dv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_76hc5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6yx68")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_7bjqv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="CharacterBody2D" unique_id=1599776544 instance=ExtResource("1_3f1il")]
+
+[node name="AnimatedSprite2D" parent="." index="0" unique_id=343195270]
+sprite_frames = SubResource("SpriteFrames_bg5dv")
+frame = 2
+frame_progress = 0.76216274
+offset = Vector2(9.45, 0)

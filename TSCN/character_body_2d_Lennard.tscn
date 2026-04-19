@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://b8b6tqa7tygyf"]
+
+[ext_resource type="PackedScene" uid="uid://6mo5s0d5jkoy" path="res://character_body_2d_Andi.tscn" id="1_1f24p"]
+[ext_resource type="Texture2D" uid="uid://cyb1frtjyjqi0" path="res://assets/Lennard/Lennard.png" id="2_ba8oa"]
+[ext_resource type="Texture2D" uid="uid://bm0j6woioh3d1" path="res://assets/Lennard/Lennard_Halbschlag.png" id="3_riu61"]
+[ext_resource type="Texture2D" uid="uid://cb3t0cee7mvhy" path="res://assets/Lennard/Lennard_Schlag.png" id="4_ycqgl"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q2enn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ba8oa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_riu61")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ycqgl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="CharacterBody2D" unique_id=1599776544 instance=ExtResource("1_1f24p")]
+
+[node name="AnimatedSprite2D" parent="." index="0" unique_id=343195270]
+sprite_frames = SubResource("SpriteFrames_q2enn")
+frame_progress = 0.11912369
