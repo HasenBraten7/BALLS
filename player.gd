@@ -2,9 +2,11 @@ extends CharacterBody2D
 @export var speed = 400
 var AI: Node2D = null
 var knocked = false
-var strength = 20
+var strength = 5
+var d_name = "Player"
 
-
+func _ready():
+	add_to_group("player")
 
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
@@ -23,15 +25,14 @@ func _physics_process(delta):
 
 func _process(delta: float) -> void:
 	if (AI != null and Input.is_action_just_pressed("click")):
-		print("Test")
 		var area = $hitarea.global_position
-		var direction = (area - global_position)
+		var direction = (area - global_position) * strength
 		AI.apply_knockback(direction)
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	print("Test2")
-	if(body.name == 'Ai'):
+	print(body.d_name)
+	if(body.d_name == 'Ai'):
 		AI = body
 
 
@@ -51,9 +52,7 @@ func apply_knockback(direction: Vector2):
 	timer.timeout.connect(_knocked_end)
 	add_child(timer)
 	timer.start()
-	print("hello")
 
 func _knocked_end():
-	print("End")
 	knocked = false
 	velocity = Vector2.ZERO
